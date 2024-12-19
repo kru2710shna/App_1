@@ -3,71 +3,61 @@ import React from 'react'
 
 export default function ElevatedCards() {
     return (
-        <View>
+        <View style={styles.wrapper}>
             <Text style={styles.headingText} >Elevated Cards</Text>
             <ScrollView horizontal={true} style={styles.container}>
                 <View style={[styles.card, styles.elevated]}>
-                    <Text>
-                        TAP
-                    </Text>
+                    <Text>TAP</Text>
                 </View>
                 <View style={[styles.card, styles.elevated]}>
-                    <Text>
-                        ME
-                    </Text>
+                    <Text>ME</Text>
                 </View>
                 <View style={[styles.card, styles.elevated]}>
-                    <Text>
-                        TO
-                    </Text>
+                    <Text>TO</Text>
                 </View>
                 <View style={[styles.card, styles.elevated]}>
-                    <Text>
-                        SCROLL
-                    </Text>
+                    <Text>SCROLL</Text>
                 </View>
                 <View style={[styles.card, styles.elevated]}>
-                    <Text>
-                        MORE...
-                    </Text>
+                    <Text>MORE...</Text>
                 </View>
-
             </ScrollView>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-
+    wrapper: {
+        paddingVertical: 10,
+    },
     headingText: {
         fontSize: 24,
         fontWeight: 'bold',
         paddingHorizontal: 8,
+        paddingBottom: 10,
     },
     container: {
-        flex: 1,
+        // Removed flex: 1
         flexDirection: 'row',
-        padding: 7,
+        paddingHorizontal: 7,
     },
     card: {
-        flex: 1,
+        // Removed flex: 1
         justifyContent: 'center',
         alignItems: 'center',
         width: 100,
         height: 100,
-        borderRadius: 4,
-        margin: 8
+        borderRadius: 8,
+        marginRight: 16, // Adjusted margin for better spacing
     },
     elevated: {
         backgroundColor: '#CAD5E2',
-        elevation:4,
         shadowOffset: {
-            width:5,
-            height:5
+            width: 0,
+            height: 2
         },
         shadowColor: 'black',
-        shadowOpacity:0.4,
-        shadowRadius:2
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
     }
-
 })
