@@ -1,6 +1,9 @@
 
 # App_1
 
+<img width="1440" alt="Screenshot 2024-12-18 at 7 14 02 PM" src="https://github.com/user-attachments/assets/a29b177d-d751-4c5b-9514-939c06e6a833" />
+
+
 
 ![alt text]('/Users/krushna/Desktop/Screenshot 2024-12-18 at 7.14.02 PM.png')
 ![alt text](http://url/to/img.png)
