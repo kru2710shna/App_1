@@ -9,9 +9,7 @@
 
 ## Step-2 Adding Flash Cards + Styles + Linking + Image + TouchableOpacity + Making Components 
 
-![Simulator Screenshot - iPhone 16 Pro - 2024-12-19 at 01 48 26](https://github.com/user-attachments/assets/b230844c-9061-47de-a5b6-f6e6d6cb2fe8)
-
-
+<img width="1440" alt="Screenshot 2024-12-19 at 1 52 24 AM" src="https://github.com/user-attachments/assets/c2b1f429-fd66-4efe-8739-cdbb368a2395" />
 
 IOS + Android App
 =======
