@@ -9,6 +9,8 @@
 
 ## Step-2 Adding Flash Cards + Styles + Linking + Image + TouchableOpacity + Making Components 
 
+<img width="1440" alt="Screenshot 2024-12-18 at 7 14 02 PM" src="https://github.com/user-attachments/assets/ee426e02-8f3e-401c-ac56-963b23273b1f" />
+
 
 IOS + Android App
 =======
