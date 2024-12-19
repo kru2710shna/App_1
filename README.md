@@ -1,5 +1,12 @@
-<<<<<<< HEAD
-# App_1
+
+# Mobile Dev
+
+
+## Step-1 Mobile Application: Hello World
+
+<img width="1440" alt="Screenshot 2024-12-18 at 7 14 02 PM" src="https://github.com/user-attachments/assets/a29b177d-d751-4c5b-9514-939c06e6a833" />
+
+
 IOS + Android App
 =======
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
@@ -81,4 +88,3 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
->>>>>>> 31f8bc1 (Initial commit)
