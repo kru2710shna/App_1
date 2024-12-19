@@ -7,6 +7,9 @@
 <img width="1440" alt="Screenshot 2024-12-18 at 7 14 02 PM" src="https://github.com/user-attachments/assets/a29b177d-d751-4c5b-9514-939c06e6a833" />
 
 
+## Step-2 Adding Flash Cards + Styles + Linking + Image + TouchableOpacity + Making Components 
+
+
 IOS + Android App
 =======
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
