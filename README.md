@@ -15,6 +15,10 @@
 
 <img width="1440" alt="Screenshot 2024-12-19 at 6 06 30 PM" src="https://github.com/user-attachments/assets/b11752ba-dea1-4605-ad95-d74f4b1257e3" />
 
+## Step-4 Dice Game
+
+<img width="1440" alt="Screenshot 2024-12-20 at 1 52 01 AM" src="https://github.com/user-attachments/assets/07c7a96d-df7b-4565-a1c1-ea6afe73a911" />
+
 IOS + Android App
 =======
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
