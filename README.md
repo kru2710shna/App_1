@@ -11,6 +11,10 @@
 
 <img width="1440" alt="Screenshot 2024-12-19 at 1 52 24 AM" src="https://github.com/user-attachments/assets/c2b1f429-fd66-4efe-8739-cdbb368a2395" />
 
+## Step-3 Adding Password Generator App
+
+<img width="1440" alt="Screenshot 2024-12-19 at 6 06 30 PM" src="https://github.com/user-attachments/assets/b11752ba-dea1-4605-ad95-d74f4b1257e3" />
+
 IOS + Android App
 =======
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
