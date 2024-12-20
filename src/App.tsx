@@ -382,90 +382,218 @@
 
 
 // PROJECT-5 ROLL THE DICE
-import { ImageSourcePropType, StyleSheet, Text, View, Image, Pressable } from 'react-native'
-import React, { useState } from 'react'
-import type { PropsWithChildren } from 'react'
+// import { ImageSourcePropType, StyleSheet, Text, View, Image, Pressable } from 'react-native'
+// import React, { useState } from 'react'
+// import type { PropsWithChildren } from 'react'
+// import ReactNativeHapticFeedback from "react-native-haptic-feedback";
+
+// import DiceOne from '../Assests/MathClipArt--Single-Die-with-1-Showing.png'
+// import DiceTwo from '../Assests/Dice-2-b.svg.png'
+// import DiceThree from '../Assests/dice_3-512.webp'
+// import DiceFour from '../Assests/Dice-4-b.svg.png'
+// import DiceFive from '../Assests/Dice-5-b.svg'
+// import DiceSix from '../Assests/dice-6-md.png'
 
 
-import DiceOne from '../Assests/MathClipArt--Single-Die-with-1-Showing.png'
-import DiceTwo from '../Assests/Dice-2-b.svg.png'
-import DiceThree from '../Assests/dice_3-512.webp'
-import DiceFour from '../Assests/Dice-4-b.svg.png'
-import DiceFive from '../Assests/Dice-5-b.svg'
-import DiceSix from '../Assests/dice-6-md.png'
+// type DiceProps = PropsWithChildren<{
+//     imageUrl: ImageSourcePropType
+// }>
+
+// const options = {
+//     enaleVibrantFallBack: true,
+//     ignoreAndroidSystemSettings: false
+// }
+// const Dice = ({ imageUrl }: DiceProps): JSX.Element => {
+//     return (
+//         <View>
+//             <Image style={styles.diceImage} source={imageUrl} />
+//         </View>
+//     )
+
+// }
+// export default function App() {
+//     const [DiceImage, setDiceImage] = useState<ImageSourcePropType>(DiceOne)
+
+//     const rollDiceTap = () => {
+//         let randomnum = Math.floor(Math.random() * 6) + 1
+
+//         switch (randomnum) {
+//             case 1:
+//                 setDiceImage(DiceOne)
+//                 break
+//             case 2:
+//                 setDiceImage(DiceTwo)
+//                 break
+//             case 3:
+//                 setDiceImage(DiceThree)
+//                 break
+//             case 4:
+//                 setDiceImage(DiceFour)
+//                 break
+//             case 5:
+//                 setDiceImage(DiceFive)
+//                 break
+//             case 6:
+//                 setDiceImage(DiceSix)
+//                 break
+//             default:
+//                 setDiceImage(DiceOne)
+//                 break
+//         }
+//         ReactNativeHapticFeedback.trigger('impactLight',options)
+//     }
+//     return (
+//         <View style={styles.conatiner}>
+//             <Dice imageUrl={DiceImage} />
+//             < Pressable
+//                 style={styles.rollingDiceText}
+//                 onPress={rollDiceTap}>
+//                 <Text>Roll the Dice</Text></Pressable>
+//         </View>
+//     )
+// }
+
+// const styles = StyleSheet.create({
+//     conatiner: {
+//         flex: 1,
+//         alignItems: 'center',
+//         justifyContent: 'center',
+//         backgroundColor: '#FFF2F2'
+//     },
+//     diceContainer: {
+//         margin: 12
+//     },
+//     diceImage: {
+//         width: 100,
+//         height: 100
+//     },
+//     rollingDiceText: {
+//         paddingVertical: 10,
+//         paddingHorizontal: 20,
+//         borderWidth: 2,
+//         borderRadius: 0,
+//     }
+// })
 
 
-type DiceProps = PropsWithChildren<{
-    imageUrl: ImageSourcePropType
-}>
+// PROJECT - Currency
 
-const Dice = ({ imageUrl }: DiceProps): JSX.Element => {
-    return (
-        <View>
-            <Image style={styles.diceImage} source={imageUrl} />
-        </View>
-    )
+// App.tsx
 
-}
-export default function App() {
-    const [DiceImage, setDiceImage] = useState<ImageSourcePropType>(DiceOne)
+import { StyleSheet, Text, View, TextInput, Alert } from 'react-native';
+import React, { useState } from 'react';
+import CurrencyButton from './components/CurrencyButton'; // Corrected import path
+import { currencyByRupee, Currency } from './constants'; // Ensure Currency interface is exported
+import Snackbar from 'react-native-snackbar';
 
-    const rollDiceTap = () => {
-        let randomnum = Math.floor(Math.random() * 6) + 1
+export default function App(): JSX.Element {
+  const [inputValue, setInputValue] = useState('');
+  const [resultValue, setResultValue] = useState('');
+  const [targetCurrency, setTargetCurrency] = useState('');
 
-        switch (randomnum) {
-            case 1:
-                setDiceImage(DiceOne)
-                break
-            case 2:
-                setDiceImage(DiceTwo)
-                break
-            case 3:
-                setDiceImage(DiceThree)
-                break
-            case 4:
-                setDiceImage(DiceFour)
-                break
-            case 5:
-                setDiceImage(DiceFive)
-                break
-            case 6:
-                setDiceImage(DiceSix)
-                break
-            default:
-                setDiceImage(DiceOne)
-                break
-        }
+  const buttonPress = (selectedCurrency: Currency) => {
+    if (!inputValue) {
+      Alert.alert(
+        'Input Required',
+        'Please enter an amount in Rupees to convert.',
+        [{ text: 'OK' }],
+        { cancelable: true }
+      );
+      return;
     }
-    return (
-        <View style={styles.conatiner}>
-            <Dice imageUrl={DiceImage} />
-            < Pressable
-                style={styles.rollingDiceText}
-                onPress={rollDiceTap}>
-                <Text>Roll the Dice</Text></Pressable>
+
+    const inputAmount = parseFloat(inputValue);
+
+    if (!isNaN(inputAmount)) {
+      const convertedValue = inputAmount * selectedCurrency.value;
+      const result = `${selectedCurrency.symbol}${convertedValue.toFixed(2)}`; // Fixed template literal
+      setResultValue(result);
+      setTargetCurrency(selectedCurrency.symbol);
+    } else {
+      Alert.alert(
+        'Invalid Input',
+        'Please enter a valid number.',
+        [{ text: 'OK' }],
+        { cancelable: true }
+      );
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Currency Converter App</Text>
+
+      {/* Input Field for Amount */}
+      <TextInput
+        style={styles.input}
+        placeholder="Enter amount in Rupees"
+        keyboardType="numeric"
+        value={inputValue}
+        onChangeText={setInputValue}
+      />
+
+      {/* Display Currency Buttons */}
+      {currencyByRupee.map((currency) => (
+        <CurrencyButton
+          key={currency.symbol}
+          name={currency.name}
+          flag={currency.flag}
+          onPress={() => buttonPress(currency)} // Passing the selected currency
+        />
+      ))}
+
+      {/* Display Converted Result */}
+      {resultValue !== '' && (
+        <View style={styles.resultContainer}>
+          <Text style={styles.resultLabel}>Converted Amount:</Text>
+          <Text style={styles.resultText}>{resultValue}</Text>
         </View>
-    )
+      )}
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    conatiner: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#FFF2F2'
-    },
-    diceContainer: {
-        margin: 12
-    },
-    diceImage: {
-        width: 100,
-        height: 100
-    },
-    rollingDiceText: {
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderWidth: 2,
-        borderRadius: 0,
-    }
-})
+  container: {
+    flex: 1,
+    justifyContent: 'center', // Center vertically
+    alignItems: 'center', // Center horizontally
+    padding: 20,
+    backgroundColor: '#f5f5f5', // Light gray background
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: '700',
+    marginBottom: 20,
+    color: '#333', // Dark text color
+  },
+  input: {
+    height: 50,
+    width: '100%',
+    borderColor: '#cccccc',
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    fontSize: 16,
+    backgroundColor: '#ffffff',
+    marginBottom: 20,
+  },
+  resultContainer: {
+    marginTop: 30,
+    padding: 20,
+    backgroundColor: '#e8f5e9', // Light green background
+    borderRadius: 10,
+    alignItems: 'center',
+    width: '100%',
+  },
+  resultLabel: {
+    fontSize: 18,
+    color: '#2e7d32', // Dark green for labels
+    marginBottom: 10,
+  },
+  resultText: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#1b5e20', // Darker green for text
+  },
+});
