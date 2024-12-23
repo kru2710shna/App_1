@@ -23,6 +23,15 @@
 
 <img width="1440" alt="Screenshot 2024-12-20 at 3 19 04 AM" src="https://github.com/user-attachments/assets/a1fba1fd-bd55-4a70-8b2c-8ae3023f4026" />
 
+## Step-6 Building Tic Tac-Toe Game Logic 
+
+<img width="1440" alt="Screenshot 2024-12-23 at 3 55 44 AM" src="https://github.com/user-attachments/assets/ff171c9c-a992-4d03-b9fe-00e1e5e523d3" />
+
+<img width="1440" alt="Screenshot 2024-12-23 at 3 55 54 AM" src="https://github.com/user-attachments/assets/acf3acfa-eec9-4fc4-bd60-14ccb61a54b4" />
+
+<img width="1440" alt="Screenshot 2024-12-23 at 3 56 01 AM" src="https://github.com/user-attachments/assets/e4d106b0-29b7-46a5-9394-98ad7084306a" />
+
+
 IOS + Android App
 =======
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
