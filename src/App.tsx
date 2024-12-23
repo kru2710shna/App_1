@@ -478,122 +478,273 @@
 
 // PROJECT - Currency
 
-// App.tsx
 
-import { StyleSheet, Text, View, TextInput, Alert } from 'react-native';
+
+// import { StyleSheet, Text, View, TextInput, Alert } from 'react-native';
+// import React, { useState } from 'react';
+// import CurrencyButton from './components/CurrencyButton'; // Corrected import path
+// import { currencyByRupee, Currency } from './constants'; // Ensure Currency interface is exported
+// import Snackbar from 'react-native-snackbar';
+
+// export default function App(): JSX.Element {
+//   const [inputValue, setInputValue] = useState('');
+//   const [resultValue, setResultValue] = useState('');
+//   const [targetCurrency, setTargetCurrency] = useState('');
+
+//   const buttonPress = (selectedCurrency: Currency) => {
+//     if (!inputValue) {
+//       Alert.alert(
+//         'Input Required',
+//         'Please enter an amount in Rupees to convert.',
+//         [{ text: 'OK' }],
+//         { cancelable: true }
+//       );
+//       return;
+//     }
+
+//     const inputAmount = parseFloat(inputValue);
+
+//     if (!isNaN(inputAmount)) {
+//       const convertedValue = inputAmount * selectedCurrency.value;
+//       const result = `${selectedCurrency.symbol}${convertedValue.toFixed(2)}`; // Fixed template literal
+//       setResultValue(result);
+//       setTargetCurrency(selectedCurrency.symbol);
+//     } else {
+//       Alert.alert(
+//         'Invalid Input',
+//         'Please enter a valid number.',
+//         [{ text: 'OK' }],
+//         { cancelable: true }
+//       );
+//     }
+//   };
+
+//   return (
+//     <View style={styles.container}>
+//       <Text style={styles.title}>Currency Converter App</Text>
+
+//       {/* Input Field for Amount */}
+//       <TextInput
+//         style={styles.input}
+//         placeholder="Enter amount in Rupees"
+//         keyboardType="numeric"
+//         value={inputValue}
+//         onChangeText={setInputValue}
+//       />
+
+//       {/* Display Currency Buttons */}
+//       {currencyByRupee.map((currency) => (
+//         <CurrencyButton
+//           key={currency.symbol}
+//           name={currency.name}
+//           flag={currency.flag}
+//           onPress={() => buttonPress(currency)} // Passing the selected currency
+//         />
+//       ))}
+
+//       {/* Display Converted Result */}
+//       {resultValue !== '' && (
+//         <View style={styles.resultContainer}>
+//           <Text style={styles.resultLabel}>Converted Amount:</Text>
+//           <Text style={styles.resultText}>{resultValue}</Text>
+//         </View>
+//       )}
+//     </View>
+//   );
+// }
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: 'center', // Center vertically
+//     alignItems: 'center', // Center horizontally
+//     padding: 20,
+//     backgroundColor: '#f5f5f5', // Light gray background
+//   },
+//   title: {
+//     fontSize: 24,
+//     fontWeight: '700',
+//     marginBottom: 20,
+//     color: '#333', // Dark text color
+//   },
+//   input: {
+//     height: 50,
+//     width: '100%',
+//     borderColor: '#cccccc',
+//     borderWidth: 1,
+//     borderRadius: 8,
+//     paddingHorizontal: 10,
+//     fontSize: 16,
+//     backgroundColor: '#ffffff',
+//     marginBottom: 20,
+//   },
+//   resultContainer: {
+//     marginTop: 30,
+//     padding: 20,
+//     backgroundColor: '#e8f5e9', // Light green background
+//     borderRadius: 10,
+//     alignItems: 'center',
+//     width: '100%',
+//   },
+//   resultLabel: {
+//     fontSize: 18,
+//     color: '#2e7d32', // Dark green for labels
+//     marginBottom: 10,
+//   },
+//   resultText: {
+//     fontSize: 20,
+//     fontWeight: '600',
+//     color: '#1b5e20', // Darker green for text
+//   },
+// });
+
+
+// Project -6 TikTacToe App
+
+
+import { FlatList, Pressable, SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
-import CurrencyButton from './components/CurrencyButton'; // Corrected import path
-import { currencyByRupee, Currency } from './constants'; // Ensure Currency interface is exported
 import Snackbar from 'react-native-snackbar';
+import Icons from './components/Icons';
 
-export default function App(): JSX.Element {
-  const [inputValue, setInputValue] = useState('');
-  const [resultValue, setResultValue] = useState('');
-  const [targetCurrency, setTargetCurrency] = useState('');
+export default function App() {
+  const [isCross, setIsCross] = useState<boolean>(false);
+  const [gameWinner, setGameWinner] = useState<string>('');
+  const [gameState, setGameState] = useState(new Array(9).fill('empty'));
 
-  const buttonPress = (selectedCurrency: Currency) => {
-    if (!inputValue) {
-      Alert.alert(
-        'Input Required',
-        'Please enter an amount in Rupees to convert.',
-        [{ text: 'OK' }],
-        { cancelable: true }
-      );
-      return;
+  const reloadGame = () => {
+    setIsCross(false);
+    setGameWinner('');
+    setGameState(new Array(9).fill('empty'));
+  };
+
+  const onChange = (index: number) => {
+    if (gameWinner) {
+      return Snackbar.show({
+        text: gameWinner,
+        backgroundColor: 'black',
+        textColor: 'white',
+      });
     }
 
-    const inputAmount = parseFloat(inputValue);
+    if (gameState[index] === 'empty') {
+      const newGameState = [...gameState];
+      newGameState[index] = isCross ? 'cross' : 'circle';
+      setGameState(newGameState);
+      const currentPlayer = isCross ? 'cross' : 'circle';
 
-    if (!isNaN(inputAmount)) {
-      const convertedValue = inputAmount * selectedCurrency.value;
-      const result = `${selectedCurrency.symbol}${convertedValue.toFixed(2)}`; // Fixed template literal
-      setResultValue(result);
-      setTargetCurrency(selectedCurrency.symbol);
+      // Check if the current move results in a win
+      const winningPatterns = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+        [0, 4, 8], [2, 4, 6], // Diagonals
+      ];
+
+      for (const pattern of winningPatterns) {
+        const [a, b, c] = pattern;
+        if (newGameState[a] === currentPlayer && newGameState[b] === currentPlayer && newGameState[c] === currentPlayer) {
+          setGameWinner(`${currentPlayer.toUpperCase()} won the game`);
+          Snackbar.show({
+            text: `${currentPlayer.toUpperCase()} won the game!`,
+            backgroundColor: 'green',
+            textColor: 'white',
+          });
+          return;
+        }
+      }
+
+      // Check if it's a draw
+      if (!newGameState.includes('empty')) {
+        setGameWinner('Draw game');
+        Snackbar.show({
+          text: 'Draw game!',
+          backgroundColor: 'orange',
+          textColor: 'white',
+        });
+      }
+
+      setIsCross(!isCross);
     } else {
-      Alert.alert(
-        'Invalid Input',
-        'Please enter a valid number.',
-        [{ text: 'OK' }],
-        { cancelable: true }
-      );
+      Snackbar.show({
+        text: 'Position is already filled',
+        backgroundColor: 'red',
+        textColor: 'white',
+      });
     }
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Currency Converter App</Text>
-
-      {/* Input Field for Amount */}
-      <TextInput
-        style={styles.input}
-        placeholder="Enter amount in Rupees"
-        keyboardType="numeric"
-        value={inputValue}
-        onChangeText={setInputValue}
+    <SafeAreaView style={styles.container}>
+      <StatusBar />
+      <View style={[styles.playerInfo, gameWinner ? styles.winnerInfo : isCross ? styles.playerX : styles.playerO]}>
+        <Text style={styles.playerText}>
+          {gameWinner || `Player ${isCross ? 'X' : 'O'}`}
+        </Text>
+      </View>
+      
+      <FlatList
+        numColumns={3}
+        data={gameState || []}
+        keyExtractor={(_, index) => index.toString()}
+        style={styles.grid}
+        renderItem={({ item, index }) => (
+          <Pressable style={styles.card} onPress={() => onChange(index)}>
+            <Icons name={item} />
+          </Pressable>
+        )}
       />
-
-      {/* Display Currency Buttons */}
-      {currencyByRupee.map((currency) => (
-        <CurrencyButton
-          key={currency.symbol}
-          name={currency.name}
-          flag={currency.flag}
-          onPress={() => buttonPress(currency)} // Passing the selected currency
-        />
-      ))}
-
-      {/* Display Converted Result */}
-      {resultValue !== '' && (
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultLabel}>Converted Amount:</Text>
-          <Text style={styles.resultText}>{resultValue}</Text>
-        </View>
-      )}
-    </View>
+      <Pressable style={styles.gameBtn} onPress={reloadGame}>
+        <Text style={styles.gameBtnText}>{gameWinner ? 'Start New Game' : 'Reload Game'}</Text>
+      </Pressable>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center', // Center vertically
-    alignItems: 'center', // Center horizontally
-    padding: 20,
-    backgroundColor: '#f5f5f5', // Light gray background
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: '700',
-    marginBottom: 20,
-    color: '#333', // Dark text color
-  },
-  input: {
-    height: 50,
-    width: '100%',
-    borderColor: '#cccccc',
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    fontSize: 16,
-    backgroundColor: '#ffffff',
-    marginBottom: 20,
-  },
-  resultContainer: {
-    marginTop: 30,
-    padding: 20,
-    backgroundColor: '#e8f5e9', // Light green background
-    borderRadius: 10,
+    justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
+    backgroundColor: '#f8f9fa',
   },
-  resultLabel: {
+  playerInfo: {
+    marginVertical: 20,
+    padding: 15,
+    borderRadius: 10,
+  },
+  winnerInfo: {
+    backgroundColor: '#d4edda',
+  },
+  playerX: {
+    backgroundColor: '#d1ecf1',
+  },
+  playerO: {
+    backgroundColor: '#f8d7da',
+  },
+  playerText: {
     fontSize: 18,
-    color: '#2e7d32', // Dark green for labels
-    marginBottom: 10,
+    fontWeight: 'bold',
   },
-  resultText: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: '#1b5e20', // Darker green for text
+  grid: {
+    width: '90%',
+  },
+  card: {
+    width: '30%',
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#dee2e6',
+  },
+  gameBtn: {
+    marginTop: 20,
+    padding: 15,
+    backgroundColor: '#007bff',
+    borderRadius: 10,
+  },
+  gameBtnText: {
+    color: '#fff',
+    fontSize: 16,
   },
 });
+
