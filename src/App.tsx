@@ -602,149 +602,209 @@
 // Project -6 TikTacToe App
 
 
-import { FlatList, Pressable, SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
-import React, { useState } from 'react';
-import Snackbar from 'react-native-snackbar';
-import Icons from './components/Icons';
+// import { FlatList, Pressable, SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
+// import React, { useState } from 'react';
+// import Snackbar from 'react-native-snackbar';
+// import Icons from './components/Icons';
 
-export default function App() {
-  const [isCross, setIsCross] = useState<boolean>(false);
-  const [gameWinner, setGameWinner] = useState<string>('');
-  const [gameState, setGameState] = useState(new Array(9).fill('empty'));
+// export default function App() {
+//   const [isCross, setIsCross] = useState<boolean>(false);
+//   const [gameWinner, setGameWinner] = useState<string>('');
+//   const [gameState, setGameState] = useState(new Array(9).fill('empty'));
 
-  const reloadGame = () => {
-    setIsCross(false);
-    setGameWinner('');
-    setGameState(new Array(9).fill('empty'));
-  };
+//   const reloadGame = () => {
+//     setIsCross(false);
+//     setGameWinner('');
+//     setGameState(new Array(9).fill('empty'));
+//   };
 
-  const onChange = (index: number) => {
-    if (gameWinner) {
-      return Snackbar.show({
-        text: gameWinner,
-        backgroundColor: 'black',
-        textColor: 'white',
-      });
-    }
+//   const onChange = (index: number) => {
+//     if (gameWinner) {
+//       return Snackbar.show({
+//         text: gameWinner,
+//         backgroundColor: 'black',
+//         textColor: 'white',
+//       });
+//     }
+//
+//     if (gameState[index] === 'empty') {
+//       const newGameState = [...gameState];
+//       newGameState[index] = isCross ? 'cross' : 'circle';
+//       setGameState(newGameState);
+//       const currentPlayer = isCross ? 'cross' : 'circle';
 
-    if (gameState[index] === 'empty') {
-      const newGameState = [...gameState];
-      newGameState[index] = isCross ? 'cross' : 'circle';
-      setGameState(newGameState);
-      const currentPlayer = isCross ? 'cross' : 'circle';
+//       // Check if the current move results in a win
+//       const winningPatterns = [
+//         [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+//         [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+//         [0, 4, 8], [2, 4, 6], // Diagonals
+//       ];
 
-      // Check if the current move results in a win
-      const winningPatterns = [
-        [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
-        [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
-        [0, 4, 8], [2, 4, 6], // Diagonals
-      ];
+//       for (const pattern of winningPatterns) {
+//         const [a, b, c] = pattern;
+//         if (newGameState[a] === currentPlayer && newGameState[b] === currentPlayer && newGameState[c] === currentPlayer) {
+//           setGameWinner(`${currentPlayer.toUpperCase()} won the game`);
+//           Snackbar.show({
+//             text: `${currentPlayer.toUpperCase()} won the game!`,
+//             backgroundColor: 'green',
+//             textColor: 'white',
+//           });
+//           return;
+//         }
+//       }
+//
+//       // Check if it's a draw
+//       if (!newGameState.includes('empty')) {
+//         setGameWinner('Draw game');
+//         Snackbar.show({
+//           text: 'Draw game!',
+//           backgroundColor: 'orange',
+//           textColor: 'white',
+//         });
+//       }
+//
+//       setIsCross(!isCross);
+//     } else {
+//       Snackbar.show({
+//         text: 'Position is already filled',
+//         backgroundColor: 'red',
+//         textColor: 'white',
+//       });
+//     }
+//   };
+//
+//   return (
+//     <SafeAreaView style={styles.container}>
+//       <StatusBar />
+//       <View style={[styles.playerInfo, gameWinner ? styles.winnerInfo : isCross ? styles.playerX : styles.playerO]}>
+//         <Text style={styles.playerText}>
+//           {gameWinner || `Player ${isCross ? 'X' : 'O'}`}
+//         </Text>
+//       </View>
 
-      for (const pattern of winningPatterns) {
-        const [a, b, c] = pattern;
-        if (newGameState[a] === currentPlayer && newGameState[b] === currentPlayer && newGameState[c] === currentPlayer) {
-          setGameWinner(`${currentPlayer.toUpperCase()} won the game`);
-          Snackbar.show({
-            text: `${currentPlayer.toUpperCase()} won the game!`,
-            backgroundColor: 'green',
-            textColor: 'white',
-          });
-          return;
-        }
-      }
+//       <FlatList
+//         numColumns={3}
+//         data={gameState || []}
+//         keyExtractor={(_, index) => index.toString()}
+//         style={styles.grid}
+//         renderItem={({ item, index }) => (
+//           <Pressable style={styles.card} onPress={() => onChange(index)}>
+//             <Icons name={item} />
+//           </Pressable>
+//         )}
+//       />
+//       <Pressable style={styles.gameBtn} onPress={reloadGame}>
+//         <Text style={styles.gameBtnText}>{gameWinner ? 'Start New Game' : 'Reload Game'}</Text>
+//       </Pressable>
+//     </SafeAreaView>
+//   );
+// }
+//
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     backgroundColor: '#f8f9fa',
+//   },
+//   playerInfo: {
+//     marginVertical: 20,
+//     padding: 15,
+//     borderRadius: 10,
+//   },
+//   winnerInfo: {
+//     backgroundColor: '#d4edda',
+//   },
+//   playerX: {
+//     backgroundColor: '#d1ecf1',
+//   },
+//   playerO: {
+//     backgroundColor: '#f8d7da',
+//   },
+//   playerText: {
+//     fontSize: 18,
+//     fontWeight: 'bold',
+//   },
+//   grid: {
+//     width: '90%',
+//   },
+//   card: {
+//     width: '30%',
+//     height: 100,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     borderWidth: 1,
+//     borderColor: '#dee2e6',
+//   },
+//   gameBtn: {
+//     marginTop: 20,
+//     padding: 15,
+//     backgroundColor: '#007bff',
+//     borderRadius: 10,
+//   },
+//   gameBtnText: {
+//     color: '#fff',
+//     fontSize: 16,
+//   },
+// });
+//
 
-      // Check if it's a draw
-      if (!newGameState.includes('empty')) {
-        setGameWinner('Draw game');
-        Snackbar.show({
-          text: 'Draw game!',
-          backgroundColor: 'orange',
-          textColor: 'white',
-        });
-      }
 
-      setIsCross(!isCross);
-    } else {
-      Snackbar.show({
-        text: 'Position is already filled',
-        backgroundColor: 'red',
-        textColor: 'white',
-      });
-    }
-  };
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar />
-      <View style={[styles.playerInfo, gameWinner ? styles.winnerInfo : isCross ? styles.playerX : styles.playerO]}>
-        <Text style={styles.playerText}>
-          {gameWinner || `Player ${isCross ? 'X' : 'O'}`}
-        </Text>
-      </View>
-      
-      <FlatList
-        numColumns={3}
-        data={gameState || []}
-        keyExtractor={(_, index) => index.toString()}
-        style={styles.grid}
-        renderItem={({ item, index }) => (
-          <Pressable style={styles.card} onPress={() => onChange(index)}>
-            <Icons name={item} />
-          </Pressable>
-        )}
-      />
-      <Pressable style={styles.gameBtn} onPress={reloadGame}>
-        <Text style={styles.gameBtnText}>{gameWinner ? 'Start New Game' : 'Reload Game'}</Text>
-      </Pressable>
-    </SafeAreaView>
-  );
-}
+// Player-7 Player Media
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f8f9fa',
-  },
-  playerInfo: {
-    marginVertical: 20,
-    padding: 15,
-    borderRadius: 10,
-  },
-  winnerInfo: {
-    backgroundColor: '#d4edda',
-  },
-  playerX: {
-    backgroundColor: '#d1ecf1',
-  },
-  playerO: {
-    backgroundColor: '#f8d7da',
-  },
-  playerText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  grid: {
-    width: '90%',
-  },
-  card: {
-    width: '30%',
-    height: 100,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#dee2e6',
-  },
-  gameBtn: {
-    marginTop: 20,
-    padding: 15,
-    backgroundColor: '#007bff',
-    borderRadius: 10,
-  },
-  gameBtnText: {
-    color: '#fff',
-    fontSize: 16,
-  },
-});
+// import { ActivityIndicator, SafeAreaView, StyleSheet, Text, View } from 'react-native'
+// import React, { useEffect, useState } from 'react'
+// import type { PropsWithChildren } from 'react'
+// import { setupPlayer, addTrack } from '../src/musicPlayerService'
+// import MusicPlayer from './screens/MusicPlayer'
+
+
+
+// export default function App() {
+
+//   const [isPlayerReady, setisPlayerReady] = useState(false)
+
+//   async function setup() {
+//     let isSetup = await setupPlayer()
+
+//     if (isSetup) {
+//       await addTrack()
+//     }
+//     setisPlayerReady(isSetup)
+//   }
+
+//   useEffect(() => {
+//     setup()
+//   },[])
+
+//   if (!isPlayerReady){
+//     return <SafeAreaView>
+//       <ActivityIndicator size="large" color="#0000ff">
+
+//       </ActivityIndicator> 
+
+//     </SafeAreaView>
+//   }
+//   return (
+//     <SafeAreaView>
+//       <View style= {styles.container}>
+//         {/* <MusicPlayer/> */}
+//         <Text>Hello</Text>
+       
+//       </View>
+//     </SafeAreaView>
+
+//   )
+// } 
+
+// const styles = StyleSheet.create({
+
+//   container: {
+//     flex: 1
+//   }
+// })
+
+
+// Navigation Project 
 

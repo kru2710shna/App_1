@@ -10,13 +10,19 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-community/slider": "^4.5.5",
+    "@react-navigation/native": "^7.0.14",
+    "@react-navigation/stack": "^7.1.1",
     "@types/react-native-vector-icons": "^6.4.18",
     "formik": "^2.4.6",
     "react": "18.3.1",
     "react-native": "0.76.5",
     "react-native-bouncy-checkbox": "^4.1.2",
     "react-native-haptic-feedback": "^2.3.3",
+    "react-native-safe-area-context": "^5.0.0",
+    "react-native-screens": "^4.4.0",
     "react-native-snackbar": "^2.8.0",
+    "react-native-track-player": "^4.1.1-nightly-2765d09cb93541d89be94a4809320e4df33c0d47",
     "react-native-vector-icons": "^10.2.0",
     "yup": "^1.6.1"
   },
