@@ -791,7 +791,7 @@
 //       <View style= {styles.container}>
 //         {/* <MusicPlayer/> */}
 //         <Text>Hello</Text>
-       
+
 //       </View>
 //     </SafeAreaView>
 
@@ -808,3 +808,73 @@
 
 // Navigation Project 
 
+// import { StatusBar, StyleSheet, Text, View } from 'react-native'
+// import React from 'react'
+
+// // Navigation
+// import { NavigationContainer } from '@react-navigation/native'
+// import { createNativeStackNavigator } from '@react-navigation/native-stack'
+
+
+
+// //screens
+// import Home from './screens/Home'
+// import Details from './screens/Details'
+
+// export type RootStackParamList = {
+//   Home: undefined,
+//   Details: { productId: string }
+// }
+
+// const Stack = createNativeStackNavigator<RootStackParamList>()
+
+// export default function App() {
+//   return (
+//     <NavigationContainer>
+
+//       <Stack.Navigator
+//         initialRouteName='Home'>
+
+//         <Stack.Screen
+//           name='Home'
+//           component={Home}
+//           options={{
+//             title: "Trending Products"
+//           }}>
+//         </Stack.Screen>
+
+//         <Stack.Screen
+//           name='Details'
+//           component={Details}
+//           options={{
+//             title: "Product Details"
+//           }}>
+
+//         </Stack.Screen>
+
+//       </Stack.Navigator>
+
+//     </NavigationContainer>
+//   )
+// }
+
+// const styles = StyleSheet.create({})
+
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+
+export default function App() {
+  return (
+    <View style = {styles.container}>
+      <Text>App</Text>
+    </View>
+  )
+}
+
+const styles = StyleSheet.create({
+  container:{
+    flex:1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+})
