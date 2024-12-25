@@ -32,6 +32,11 @@
 <img width="1440" alt="Screenshot 2024-12-23 at 3 56 01 AM" src="https://github.com/user-attachments/assets/e4d106b0-29b7-46a5-9394-98ad7084306a" />
 
 
+## Step-7 Psge Navigstion
+
+<img width="1440" alt="Screenshot 2024-12-24 at 4 45 31 PM" src="https://github.com/user-attachments/assets/7318e2fc-53fd-46b8-829a-7a108a2f0551" />
+<img width="1440" alt="Screenshot 2024-12-24 at 4 45 35 PM" src="https://github.com/user-attachments/assets/b6e6caf6-766d-470a-b752-48ace8623502" />
+
 IOS + Android App
 =======
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
